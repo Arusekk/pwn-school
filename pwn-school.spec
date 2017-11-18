@@ -53,6 +53,7 @@ for i in `seq 1 15`; do
 done
 
 %files
+%defattr(-,root,root)
 %doc README.md
 %config %{_sysconfdir}/gdbinit.d/020.peda.gdb
 /var/pwn-school

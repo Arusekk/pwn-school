@@ -1,4 +1,4 @@
-MAXNUM := 9
+MAXNUM := 10
 LDFLAGS-pwn := $(LDFLAGS) -L. -lpwn-school
 #-Wl,-rpath=$(DESTDIR)/var/pwn-school
 CP ?= cp
