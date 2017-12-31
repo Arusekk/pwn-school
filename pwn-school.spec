@@ -5,13 +5,14 @@
 Name:           pwn-school
 Version:        1.0.0
 Release:        %mkrel 1
-Summary:        Learning tool how to pwn badly written programs
+Summary:        Learn how to pwn badly written programs
 
 License:        GPLv3
 URL:            https://github.com/Arusekk/pwn-school
 Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  pythonegg(2)(python)
+BuildRequires:  pkgconfig(openssl)
 Requires:       pythonegg(2)(pip)
 # pythonegg(2)(peda) pythonegg(2)(pwntools)
 Requires:       gdb
@@ -41,7 +42,7 @@ done
 for i in `seq 1 15`; do
   sh /var/pwn-school/fixperm.sh /var/pwn-school/pwn$i $i
 done
-pip2 install peda pwntools ropper
+python2 -m pip install peda pwntools ropper
 
 %preun
 rm /var/pwn-school/pwn?/password

@@ -26,6 +26,17 @@ all: libpwn-school.so
 	done
 .PHONY: all
 
+test: libpwn-school.so homes
+	@for i in `seq 1 $(MAXNUM)`; do \
+	  ( ulimit -t 9; \
+	    cd homes/pwn$$i;echo -n $$i:; \
+	    (echo id; while pgrep grep &>/dev/null; do sleep 0.1; done) | \
+	    env PATH=/bin:/usr/bin LC_ALL=C python solution 2>&1 | \
+	    grep -q groups \
+	  ) && echo PASS||echo FAIL; \
+	done
+.PHONY: test
+
 clean:
 	$(RM) -r homes libpwn-school.so*
 .PHONY: clean
