@@ -31,7 +31,7 @@ test: libpwn-school.so homes
 	  ( ulimit -t 9; \
 	    cd homes/pwn$$i;echo -n $$i:; \
 	    (echo id; while pgrep grep &>/dev/null; do sleep 0.1; done) | \
-	    env PATH=/bin:/usr/bin LC_ALL=C python solution 2>&1 | \
+	    LC_ALL=C python solution 2>&1 | \
 	    grep -q groups \
 	  ) && echo PASS||echo FAIL; \
 	done

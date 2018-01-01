@@ -2,26 +2,22 @@ from pwn import *
 
 context.clear(arch='amd64')
 
-e = ELF('./prog')
+with tempfile.NamedTemporaryFile(prefix='pwn-') as tf, open(os.devnull, 'r+b') as DEVNULL:
+	tempor = tf.name
+	os.dup2(DEVNULL.fileno(), tf.fileno())
 
-tempor = '/tmp/pwn-%d'%os.getpid()
+	e = ELF('prog')
+	e.write(e.got.memcmp, e.read(e.got.puts, e.bytes))
+	e.write(e.got.nanosleep, p64(ROP(e).ret.address))
+	e.save(tempor)
 
-a = e.functions.main.disasm()
-e.write(e.got.memcmp, e.read(e.got.puts, e.bytes))
-e.write(e.got.nanosleep, p64(ROP(e).ret.address))
-e.save(tempor)
+	os.chmod(tempor, 0500)
+	p = process(tempor, stdin=DEVNULL)
+	p.readline()
+	p.readline()
+	ans = p.readline().strip()
+	print(ans)
 
-del e
-
-os.chmod(tempor, 0775)
-with open('/dev/null', 'r+b') as DEVNULL:
-  p = process(tempor, stdin=DEVNULL)
-  p.readline()
-  p.readline()
-  ans = p.readline().strip()
-print(ans)
-os.unlink(tempor)
-
-p = process('./prog')
+p = e.process()
 p.sendline(ans)
 p.interactive()

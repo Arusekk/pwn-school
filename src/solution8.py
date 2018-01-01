@@ -4,7 +4,7 @@ context.clear(arch='amd64')
 
 ref = 'puts'
 
-e = ELF('./prog')
+e = ELF('prog')
 n1 = (e.got[ref] - e.sym.ans) // context.bytes + 4
 n2 = (e.got.strcmp - e.sym.ans) // context.bytes + 4
 

