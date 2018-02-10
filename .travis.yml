@@ -5,3 +5,5 @@ install:
   - pip install pwn
 script:
   - make test
+virtualenv:
+  system_site_packages: true
