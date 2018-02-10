@@ -1,0 +1,7 @@
+language: c
+python:
+  - "2.7"
+install:
+  - pip install pwn
+script:
+  - make test
