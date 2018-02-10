@@ -4,6 +4,6 @@ python:
 install:
   - pip install pwn
 script:
-  - make && make test
+  - make -j4 && make -j4 test
 virtualenv:
   system_site_packages: true
