@@ -2,6 +2,11 @@ from pwn import *
 
 context.clear(arch='amd64')
 
+checkingtime = 8
+tosleep = checkingtime - (time.time() + checkingtime)%60
+if tosleep > 0:
+	time.sleep(tosleep+0.5)
+
 with tempfile.NamedTemporaryFile(prefix='pwn-') as tf, open(os.devnull, 'r+b') as DEVNULL:
 	tempor = tf.name
 	os.dup2(DEVNULL.fileno(), tf.fileno())
