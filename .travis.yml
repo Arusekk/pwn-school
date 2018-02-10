@@ -2,8 +2,9 @@ language: python
 python:
   - "2.7"
 install:
-  - pip install pwn
+  - pip install capstone==3.0.5rc2 pwn
 script:
-  - make -j4 && make -j4 test
+  - make -j4
+  - make test
 virtualenv:
   system_site_packages: true
