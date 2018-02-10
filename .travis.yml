@@ -1,9 +1,9 @@
-language: c
+language: python
 python:
   - "2.7"
 install:
   - pip install pwn
 script:
-  - make test
+  - make && make test
 virtualenv:
   system_site_packages: true
