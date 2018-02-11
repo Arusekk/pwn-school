@@ -7,7 +7,7 @@
 static void printaction(int sig, siginfo_t *pinfo, void *ucontext) {
   psignal(sig, "signaled");
   psiginfo(pinfo, "signaled: details");
-  fprintf(stderr, "si_addr = %p \"%s\"", pinfo->si_addr, pinfo->si_addr);
+  fprintf(stderr, "si_addr = %p \"%s\"", pinfo->si_addr, (char*)pinfo->si_addr);
   abort();
 }
 

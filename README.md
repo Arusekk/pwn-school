@@ -1,4 +1,5 @@
 # pwn-school
+[![Build Status](https://travis-ci.org/Arusekk/pwn-school.svg?branch=master)](https://travis-ci.org/Arusekk/pwn-school)
 Learn how to pwn badly written programs
 
 # What is pwn-school?
@@ -17,7 +18,15 @@ Learn why:
 * `make`
 * `libopenssl`
 * sample solutions are using Python 2.x with `pwntools`, recommended are also `peda` and `ropper`.
-To install them all using `pip`, just type: `pip install pwntools peda ropper`
+To install them all using `pip`, just type:
+```sh
+pip install pwn peda ropper
+```
+* if python module capstone complains about its shared library, install its new version using
+```sh
+pip install capstone==3.0.5rc2
+```
+
 
 # Building
 	make && make install
