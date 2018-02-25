@@ -1,8 +1,7 @@
 from pwn import *
 
-context.clear(arch='amd64')
-
 p = process('./prog')
+context.clear(arch=p.elf.arch, endian=p.elf.endian)
 
 payload = asm(shellcraft.sh())
 

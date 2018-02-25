@@ -1,9 +1,9 @@
 from pwn import *
 
 e = ELF('prog')
-p = e.process()
+context.clear(arch=e.arch, endian=e.endian)
 
-context.clear(arch='amd64')
+p = e.process()
 
 p.readuntil('at')
 addr = int(p.readline(), 0)

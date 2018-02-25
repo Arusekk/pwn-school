@@ -1,10 +1,10 @@
 from pwn import *
 
-context.clear(arch='amd64')
-
 ref = 'puts'
 
 e = ELF('prog')
+context.clear(arch=e.arch, endian=e.endian)
+
 n1 = (e.got[ref] - e.sym.ans) // context.bytes + 4
 n2 = (e.got.strcmp - e.sym.ans) // context.bytes + 4
 

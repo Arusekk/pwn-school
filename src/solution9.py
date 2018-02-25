@@ -1,6 +1,7 @@
 from pwn import *
 
-context.clear(arch='amd64')
+e = ELF('prog')
+context.clear(arch=e.arch, endian=e.endian)
 
 checkingtime = 8
 tosleep = checkingtime - (time.time() + checkingtime)%60
@@ -11,9 +12,8 @@ with tempfile.NamedTemporaryFile(prefix='pwn-') as tf, open(os.devnull, 'r+b') a
 	tempor = tf.name
 	os.dup2(DEVNULL.fileno(), tf.fileno())
 
-	e = ELF('prog')
-	e.write(e.got.memcmp, e.read(e.got.puts, e.bytes))
-	e.write(e.got.nanosleep, p64(ROP(e).ret.address))
+	e.pack(e.got.memcmp, e.unpack(e.got.puts))
+	e.pack(e.got.nanosleep, ROP(e).ret.address)
 	e.save(tempor)
 
 	os.chmod(tempor, 0500)
