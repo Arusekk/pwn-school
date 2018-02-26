@@ -1,7 +1,7 @@
 %global dont_strip 1
 %global __debug_install_post %{nil}
 %global debug_package %{nil}
-%global rpmv %(rpm -q --qf %%{v} rpm|cut -d. -f-3|sed s/\\.//g)
+%global recreq %(rpm -q --qf %%{v} rpm|cut -d. -f-3|awk '/^([0-3]|4\\.(1[0-2]|[0-9]))\\./{print "Requires";exit}{print "Recommends"}')
 
 Name:           pwn-school
 Version:        1.0.0
@@ -16,11 +16,7 @@ BuildRequires:  pkgconfig(libssl) pkgconfig(libcrypto)
 Requires:       pythonegg(2)(pip)
 # pythonegg(2)(peda) pythonegg(2)(pwntools)
 Requires:       /bin/bash
-%if %{rpmv} >= 4120
-Recommends:     gdb
-%else
-Requires:       gdb
-%endif
+%{recreq}:      gdb
 
 %description
 Pwn School teaches how to pwn applications with errors such as off-by-one,
