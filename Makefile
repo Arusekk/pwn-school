@@ -31,7 +31,7 @@ homes/%/.bash_profile: bash_profile
 homes/pwn%/prog.c: src/prog%.c
 	$(CP) -a $< $@
 homes/%/prog: homes/%/prog.c
-	$(CC) $(CFLAGS) -o $@ $< `head -1 $< |cut -d: -f2-` $(LDFLAGS-pwn)
+	$(CC) $(CFLAGS) -o $@ $< $(shell eval echo `head -1 $< |cut -d: -f2-`) $(LDFLAGS-pwn)
 homes/pwn%/solution: src/solution%.py
 	$(CP) -a $< $@
 homes/pwn%/motd: src/motd%

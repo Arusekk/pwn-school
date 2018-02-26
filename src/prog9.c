@@ -1,4 +1,4 @@
-// compile with: -Os -Wall -Wextra -lssl -lcrypto
+// compile with: -Os -Wall -Wextra $(pkg-config --cflags --libs libssl libcrypto)
 #include <openssl/sha.h>
 #include <openssl/bn.h>
 #include <stdio.h>
