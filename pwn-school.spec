@@ -11,12 +11,11 @@ License:        GPLv3
 URL:            https://github.com/Arusekk/pwn-school
 Source0:        %{name}-%{version}.tar.gz
 
-BuildRequires:  pythonegg(2)(python)
-BuildRequires:  pkgconfig(openssl)
+BuildRequires:  pkgconfig(libssl) pkgconfig(libcrypto)
 Requires:       pythonegg(2)(pip)
 # pythonegg(2)(peda) pythonegg(2)(pwntools)
-Requires:       gdb
 Requires:       /bin/bash
+Recommends:     gdb
 
 %description
 Pwn School teaches how to pwn applications with errors such as off-by-one,
