@@ -11,7 +11,7 @@ addons:
 install:
   - pip install capstone==3.0.5rc2 pwn
 script:
-  - export PWN_SCHOOL_VERSION=$(rpm -q --qf '%{version}' --specfile pwn-school.spec)
+  - export PWN_SCHOOL_VERSION=$(rpm -q --qf '%{v}' --specfile pwn-school.spec)
   - mkdir -p ~/rpmbuild/SOURCES && git archive HEAD --prefix=pwn-school-${PWN_SCHOOL_VERSION}/ | gzip > ~/rpmbuild/SOURCES/pwn-school-${PWN_SCHOOL_VERSION}.tar.gz
   - rpmbuild -ba --nodeps pwn-school.spec
   - cd .. && mv pwn-school pwn-school-${PWN_SCHOOL_VERSION}; cd pwn-school*/
