@@ -10,7 +10,7 @@ Homepage: https://github.com/Arusekk/pwn-school
 
 Package: pwn-school
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python2 (>= 2.7)
+Depends: ${shlibs:Depends}, ${misc:Depends}, gdb
 Description: Learn how to pwn badly written programs
  Pwn School teaches how to pwn applications with errors such as off-by-one,
  helps to understand stack- and heap-overflows.
