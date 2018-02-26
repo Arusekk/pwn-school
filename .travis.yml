@@ -6,7 +6,7 @@ addons:
     packages:
       - debhelper
       - fakeroot
-      - rpmlint
+      - rpm
 install:
   - pip install capstone==3.0.5rc2 pwn
 script:
@@ -14,7 +14,6 @@ script:
   - mkdir -p ~/rpmbuild/SOURCES
   - git archive HEAD --prefix=pwn-school-${PWN_SCHOOL_VERSION}/ | gzip > ~/rpmbuild/SOURCES/pwn-school-${PWN_SCHOOL_VERSION}.tar.gz
   - rpmbuild -ba pwn-school.spec
-  - rpmlint ~/rpmbuild/RPMS/*/*.rpm ~/rpmbuild/SRPMS/*.rpm
   - cd ..; mv pwn-school pwn-school-${PWN_SCHOOL_VERSION}; cd pwn-school-*/
   - debian/rules clean
   - debian/rules build
