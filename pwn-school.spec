@@ -1,7 +1,13 @@
 %global dont_strip 1
 %global __debug_install_post %{nil}
 %global debug_package %{nil}
-%global recreq %(rpm --version|cut -f3 -d\\ |cut -d. -f-3|awk '/^([0-3]|4\\.(1[0-2]|[0-9]))[^0-9]/{print "Requires";exit}{print "Recommends"}')
+%global rpm_is_new %(rpm --version|cut -f3 -d\\ |cut -d. -f-3|awk '/^([0-3]|4\\.(1[0-2]|[0-9]))[^0-9]/{print "0";exit}{print "1"}')
+%if rpm_is_new
+%global recreq Recommends
+%else
+%global recreq Requires
+%endif
+%{?!make_build:%global make_build %{make}}
 
 Name:           pwn-school
 Version:        1.0.0
