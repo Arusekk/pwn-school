@@ -4,7 +4,7 @@
 
 Name:           pwn-school
 Version:        1.0.0
-Release:        %mkrel 1
+Release:        1%{?dist}
 Summary:        Learn how to pwn badly written programs
 
 License:        GPLv3
