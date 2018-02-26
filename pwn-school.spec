@@ -15,7 +15,7 @@ BuildRequires:  pkgconfig(libssl) pkgconfig(libcrypto)
 Requires:       pythonegg(2)(pip)
 # pythonegg(2)(peda) pythonegg(2)(pwntools)
 Requires:       /bin/bash
-Recommends:     gdb
+Suggests:       gdb
 
 %description
 Pwn School teaches how to pwn applications with errors such as off-by-one,
