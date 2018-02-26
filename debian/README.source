@@ -1,0 +1,8 @@
+pwn-school for Debian
+--------------------
+
+Using the package is as simple as doing:
+su - pwn1
+and typing in the password `pwnme2day`.
+
+ -- Arusekk <arek_koz@o2.pl>  Mon, 26 Feb 2018 08:10:50 +0100

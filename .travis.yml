@@ -1,10 +1,16 @@
 language: python
 python:
   - "2.7"
+addons:
+  apt:
+    packages:
+      - debhelper
 install:
   - pip install capstone==3.0.5rc2 pwn
 script:
-  - make -j4
-  - make test
+  - cd ..; mv pwn-school pwn-school-1.0.0; cd pwn-school-*
+  - debian/rules clean
+  - debian/rules build
+  - fakeroot debian/rules binary
 virtualenv:
   system_site_packages: true
