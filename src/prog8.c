@@ -1,4 +1,4 @@
-// compile with: -Os -Wall -Wextra -fPIE -pie -fno-stack-protector
+// compile with: -Os -Wall -Wextra ${CC_PIE} -fno-stack-protector
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>

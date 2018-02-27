@@ -1,4 +1,4 @@
-// compile with: -O2 -Wall -Wextra -fPIE -pie -fno-stack-protector -D_FORTIFY_SOURCE=0 -z execstack
+// compile with: -O2 -Wall -Wextra ${CC_PIE} -fno-stack-protector -D_FORTIFY_SOURCE=0 -z execstack
 #include <stdio.h>
 #include <stdlib.h>
 

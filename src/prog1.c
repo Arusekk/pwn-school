@@ -1,4 +1,4 @@
-// compile with: -O2 -Wall -Wextra -fno-pic -no-pie -fstack-protector-all
+// compile with: -O2 -Wall -Wextra ${CC_NO_PIE} -fstack-protector-all
 #include <stdio.h>
 #include <stdlib.h>
 

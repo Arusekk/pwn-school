@@ -9,6 +9,10 @@ prefix ?= /usr
 exec_prefix ?= $(prefix)
 libdir ?= $(exec_prefix)/lib64
 
+export CC_NO_PIE := -fno-pic
+# CC_NO_PIE := -fno-pic -no-pie
+export CC_PIE := -fPIE -pie
+
 NUMBERS := $(shell seq 1 $(MAXNUM))
 TESTHOMES := $(addprefix test-home-,$(NUMBERS))
 ALLHOMES := $(addprefix all-home-,$(NUMBERS))

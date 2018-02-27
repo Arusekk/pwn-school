@@ -1,4 +1,4 @@
-// compile with: -O2 -Wall -Wextra -fno-pic -no-pie -fno-stack-protector -D_FORTIFY_SOURCE=0
+// compile with: -O2 -Wall -Wextra ${CC_NO_PIE} -fno-stack-protector -D_FORTIFY_SOURCE=0
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -6,6 +6,7 @@
 void gadgets()
 {
   __asm__ __volatile__(
+#ifdef __x86_64__
     "pop %%rax;"
     "ret;"
     "pop %%rsi;"
@@ -14,6 +15,16 @@ void gadgets()
     "ret;"
     "syscall;"
     "ret;"
+#elif defined(__i386__)
+    "pop %%eax;"
+    "ret;"
+    "pop %%ebx;"
+    "ret;"
+    "pop %%ecx;"
+    "ret;"
+    "int 0x80;"
+    "ret;"
+#endif
     : :
   );
 }
@@ -31,6 +42,6 @@ int main()
     puts("I don't know you!");
     exit(0);
   }
-  
+
   return 0;
 }
