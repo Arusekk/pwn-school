@@ -5,7 +5,7 @@
 
 void gadgets()
 {
-  __asm__ __volatile__(
+  __asm__ __volatile__(""
 #ifdef __x86_64__
     "pop %%rax;"
     "ret;"
@@ -24,6 +24,13 @@ void gadgets()
     "ret;"
     "int 0x80;"
     "ret;"
+#elif defined(__arm__)
+    "pop {lr};"
+    "pop {pc};"
+    "pop {r7,r0,r1};"
+    "bx lr;"
+    "swi 0x0;"
+    "bx lr;"
 #endif
     : :
   );
