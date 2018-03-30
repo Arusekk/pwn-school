@@ -1,7 +1,7 @@
 from pwn import *
 
-e = ELF('prog')
-context.clear(arch=e.arch, endian=e.endian)
+context.binary = 'prog'
+e = context.binary
 
 checkingtime = 8
 tosleep = checkingtime - (time.time() + checkingtime)%60

