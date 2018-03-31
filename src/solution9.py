@@ -16,7 +16,7 @@ with tempfile.NamedTemporaryFile(prefix='pwn-') as tf, open(os.devnull, 'r+b') a
 	e.pack(e.got.nanosleep, ROP(e).ret.address)
 	e.save(tempor)
 
-	os.chmod(tempor, 0500)
+	os.chmod(tempor, 0o500)
 	p = process(tempor, stdin=DEVNULL)
 	p.readline()
 	p.readline()
