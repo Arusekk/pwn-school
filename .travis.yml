@@ -14,7 +14,6 @@ cache:
   - directories:
     - usr
     - /home/travis/virtualenv/python2.7_with_system_site_packages
-    - /home/travis/virtualenv/python3.6_with_system_site_packages
 install:
   - pip install --upgrade capstone==3.0.5rc2 pwn
 script:

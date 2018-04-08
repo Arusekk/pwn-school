@@ -29,17 +29,17 @@ all: libpwn-school.so $(ALLHOMES)
 
 homes/%/workspace:
 	mkdir -p $@
-homes/%/.bashrc: homes/%/workspace bashrc
+homes/%/.bashrc: bashrc homes/%/workspace
 	$(CP) -a $< $@
-homes/%/.bash_profile: homes/%/workspace bash_profile
+homes/%/.bash_profile: bash_profile homes/%/workspace
 	$(CP) -a $< $@
-homes/pwn%/prog.c: homes/pwn%/workspace src/prog%.c
+homes/pwn%/prog.c: src/prog%.c homes/pwn%/workspace
 	$(CP) -a $< $@
 homes/%/prog: homes/%/prog.c
 	$(CC) $(CFLAGS) -o $@ $< $(shell eval echo `head -1 $< |cut -d: -f2-`) $(LDFLAGS-pwn)
-homes/pwn%/solution: homes/pwn%/workspace src/solution%.py
+homes/pwn%/solution: src/solution%.py homes/pwn%/workspace
 	$(CP) -a $< $@
-homes/pwn%/motd: homes/pwn%/workspace src/motd%
+homes/pwn%/motd: src/motd% homes/pwn%/workspace
 	$(CP) -a $< $@
 
 $(ALLHOMES): all-home-%: homes/pwn%/.bashrc homes/pwn%/.bash_profile \
