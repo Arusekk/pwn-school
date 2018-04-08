@@ -12,12 +12,11 @@ addons:
 cache:
   - pip
   - directories:
-    - usr
-    - /home/travis/virtualenv/python2.7_with_system_site_packages
-    - /home/travis/virtualenv/python3.6_with_system_site_packages
+    - virtualenv
 install:
-  - test -x /home/travis/virtualenv/python3.6_with_system_site_packages/bin/activate || python3 -m virtualenv --system-site-packages /home/travis/virtualenv/python3.6_with_system_site_packages && source /home/travis/virtualenv/python3.6_with_system_site_packages/bin/activate || test -x /home/travis/virtualenv/python2.7_with_system_site_packages/bin/activate || python2 -m virtualenv --system-site-packages /home/travis/virtualenv/python2.7_with_system_site_packages && source /home/travis/virtualenv/python2.7_with_system_site_packages/bin/activate || true
   - pip install --upgrade capstone==3.0.5rc2 pwn
+  - git clone --branch=full-3-compat https://github.com/Arusekk/pwntools.git
+  - (cd pwntools; pip install --upgrade --editable .)
 script:
   - export PWN_SCHOOL_VERSION=$(rpm -q --qf '%{v}' --specfile pwn-school.spec)
   - mkdir -p ~/rpmbuild/SOURCES && git archive HEAD --prefix=pwn-school-${PWN_SCHOOL_VERSION}/ | gzip > ~/rpmbuild/SOURCES/pwn-school-${PWN_SCHOOL_VERSION}.tar.gz
@@ -25,5 +24,3 @@ script:
   - debian/rules clean
   - debian/rules build
   - fakeroot debian/rules binary
-#virtualenv:
-  #system_site_packages: true
