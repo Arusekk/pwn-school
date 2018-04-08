@@ -1,7 +1,7 @@
 language: python
 python:
   - "2.7"
-  - "3.6"
+  - "3.7"
 addons:
   apt:
     packages:
@@ -12,8 +12,9 @@ addons:
 cache:
   - pip
   - directories:
-    - /home/travis/virtualenv/python2.7.13/lib/python2.7/site-packages/
-    - /home/travis/virtualenv/python2.7.13/bin/
+    - usr
+    - /home/travis/virtualenv/python3.7_with_system_site_packages
+    - /home/travis/virtualenv/python2.7_with_system_site_packages
 install:
   - pip install --upgrade capstone==3.0.5rc2 pwn
 script:
