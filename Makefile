@@ -35,7 +35,7 @@ homes/%/.bash_profile: bash_profile homes/%/workspace
 	$(CP) -a $< $@
 homes/pwn%/prog.c: src/prog%.c homes/pwn%/workspace
 	$(CP) -a $< $@
-homes/%/prog: homes/%/prog.c
+homes/%/prog: homes/%/prog.c libpwn-school.so
 	$(CC) $(CFLAGS) -o $@ $< $(shell eval echo `head -1 $< |cut -d: -f2-`) $(LDFLAGS-pwn)
 homes/pwn%/solution: src/solution%.py homes/pwn%/workspace
 	$(CP) -a $< $@
