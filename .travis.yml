@@ -16,7 +16,6 @@ cache:
     - /home/travis/virtualenv/python2.7_with_system_site_packages
     - /home/travis/virtualenv/python3.6_with_system_site_packages
 install:
-  - rm -rf /home/travis/virtualenv/python3.6_with_system_site_packages
   - pip install --upgrade capstone==3.0.5rc2 pwn
 script:
   - export PWN_SCHOOL_VERSION=$(rpm -q --qf '%{v}' --specfile pwn-school.spec)
@@ -27,3 +26,5 @@ script:
   - fakeroot debian/rules binary
 virtualenv:
   system_site_packages: true
+after_success:
+  - test -x /home/travis/virtualenv/python3.6_with_system_site_packages/bin/activate || python3 -m virtualenv --system-site-packages /home/travis/virtualenv/python3.6_with_system_site_packages
