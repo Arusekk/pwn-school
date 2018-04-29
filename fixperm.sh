@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 
 dir=$1
 curusr=pwn$2
@@ -27,3 +27,4 @@ chmod -R 0775 $dir/workspace
 chmod 6555 $dir/prog
 chmod 0440 $dir/prog.* $dir/solution* $dir/password*
 grep -qi password $dir/prog.* || chmod 0444 $dir/prog.*
+

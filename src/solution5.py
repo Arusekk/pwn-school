@@ -19,7 +19,9 @@ for line in e.functions.main.disasm().splitlines():
 		break
 	op, arg = line.split()[-2:]
 e.address += disclosed[5] - retaddr
-assert e.address & 0xfff == 0
+off = e.address & 0xfff
+if off != 0:
+    log.error("Offset is nonzero: %#x" % off)
 
 addr = e.sym.unused_remainder_from_old_version
 
