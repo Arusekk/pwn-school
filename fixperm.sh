@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 dir=$1
 curusr=pwn$2
@@ -6,7 +6,7 @@ nxtusr=pwn$((1+$2))
 
 passw() {
   # echo $2 | passwd --stdin $1
-  echo '$1:$2' | chpasswd
+  echo "$1:$2" | chpasswd
 }
 
 [ -f $dir/prog ] || exit
@@ -15,7 +15,7 @@ if [ $2 -eq 1 ]; then
 fi
 
 dd if=/dev/urandom bs=64 count=1 | md5sum | cut -d' ' -f1 > $dir/password
-passw $nxtusr `cat $dir/password`
+passw $nxtusr $(cat $dir/password)
 
 chown -R $curusr:$curusr $dir
 chown $nxtusr:$nxtusr $dir/prog*
