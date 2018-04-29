@@ -15,7 +15,7 @@ int main()
   puts("Which element to get?");
   scanf("%d", &n);
   assert(n < 2);
-  printf("%lld\n", arr[n]);
+  printf("%llu\n", arr[n]);
 
   puts("Which element to set?");
   scanf("%d", &n);

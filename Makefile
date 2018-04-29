@@ -48,7 +48,7 @@ $(ALLHOMES): all-home-%: homes/pwn%/.bashrc homes/pwn%/.bash_profile \
 
 test: $(TESTHOMES)
 .PHONY: test
-$(TESTHOMES): test-home-%: homes/pwn%/prog homes/pwn%/solution
+$(TESTHOMES): test-home-%: homes/pwn%/workspace homes/pwn%/prog homes/pwn%/solution
 	@( ulimit -t 18; cd homes/pwn$*;\
 	    touch .lock; \
 	    (echo id; i=1; while [ -f .lock ] && [ $$i -lt 90 ]; do sleep 0.1; i=$$((i+1)); done; echo) | \
