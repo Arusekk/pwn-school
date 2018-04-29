@@ -30,17 +30,17 @@ all: libpwn-school.so $(ALLHOMES)
 homes/%/workspace:
 	mkdir -p $@
 homes/%/.bashrc: bashrc homes/%/workspace
-	$(CP) -a $< $@
+	$(CP) $< $@
 homes/%/.bash_profile: bash_profile homes/%/workspace
-	$(CP) -a $< $@
+	$(CP) $< $@
 homes/pwn%/prog.c: src/prog%.c homes/pwn%/workspace
-	$(CP) -a $< $@
+	$(CP) $< $@
 homes/%/prog: homes/%/prog.c libpwn-school.so
 	$(CC) $(CFLAGS) -o $@ $< $(shell eval echo `head -1 $< |cut -d: -f2-`) $(LDFLAGS-pwn)
 homes/pwn%/solution: src/solution%.py homes/pwn%/workspace
-	$(CP) -a $< $@
+	$(CP) $< $@
 homes/pwn%/motd: src/motd% homes/pwn%/workspace
-	$(CP) -a $< $@
+	$(CP) $< $@
 
 $(ALLHOMES): all-home-%: homes/pwn%/.bashrc homes/pwn%/.bash_profile \
              homes/pwn%/prog.c homes/pwn%/prog homes/pwn%/solution homes/pwn%/motd
@@ -48,7 +48,7 @@ $(ALLHOMES): all-home-%: homes/pwn%/.bashrc homes/pwn%/.bash_profile \
 
 test: $(TESTHOMES)
 .PHONY: test
-$(TESTHOMES): test-home-%: homes/pwn%/workspace homes/pwn%/prog homes/pwn%/solution
+$(TESTHOMES): test-home-%: homes/pwn%/prog homes/pwn%/solution
 	@( ulimit -t 18; cd homes/pwn$*;\
 	    touch .lock; \
 	    (echo id; i=1; while [ -f .lock ] && [ $$i -lt 90 ]; do sleep 0.1; i=$$((i+1)); done; echo) | \
