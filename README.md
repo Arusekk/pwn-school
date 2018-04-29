@@ -1,4 +1,5 @@
 # pwn-school
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/948cfcc9b9ac498b9545c42a2fb2bd76)](https://app.codacy.com/app/Arusekk/pwn-school?utm_source=github.com&utm_medium=referral&utm_content=Arusekk/pwn-school&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/Arusekk/pwn-school.svg?branch=master)](https://travis-ci.org/Arusekk/pwn-school)
 
 Learn how to pwn badly written programs
