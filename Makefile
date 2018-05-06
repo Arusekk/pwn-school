@@ -54,7 +54,7 @@ $(TESTHOMES): test-home-%: homes/pwn%/workspace homes/pwn%/prog homes/pwn%/solut
 	    (echo id; i=1; while [ -f .lock ] && [ $$i -lt 90 ]; do sleep 0.1; i=$$((i+1)); done; echo) | \
 	    LC_ALL=C LD_LIBRARY_PATH=$(PWD) $(PYTHON) solution 2>&1 |tee outp | \
 	    (grep -q groups; e=$$?; $(RM) .lock; exit $$e) \
-	  ) && echo $@: PASS||(echo $@: FAIL; cat homes/pwn$*/outp; $(RM) .lock; exit 1)
+	  ) && echo $@: PASS||(echo $@: FAIL; cat homes/pwn$*/outp; $(RM) homes/pwn$*/.lock homes/pwn$*/outp; exit 1)
 .PHONY: $(TESTHOMES)
 
 clean:

@@ -9,12 +9,12 @@ passw() {
   echo "$1:$2" | chpasswd
 }
 
-[ -f $dir/prog ] || exit
+[ -f $dir/prog ] || exit 0
 if [ $2 -eq 1 ]; then
   passw $curusr 'pwnme2day'
 fi
 
-dd if=/dev/urandom bs=64 count=1 | md5sum | cut -d' ' -f1 > $dir/password
+dd if=/dev/urandom bs=64 count=1 status=none | md5sum | cut -d' ' -f1 > $dir/password
 passw $nxtusr $(cat $dir/password)
 
 chown -R $curusr:$curusr $dir
