@@ -13,7 +13,7 @@ with tempfile.NamedTemporaryFile(prefix='pwn-') as tf, open(os.devnull, 'r+b') a
 	os.dup2(DEVNULL.fileno(), tf.fileno())
 
 	e.pack(e.got.memcmp, e.unpack(e.got.puts))
-	e.pack(e.got.nanosleep, ROP(e).ret.address)
+	e.asm(e.plt.nanosleep, shellcraft.ret())
 	e.save(tempor)
 
 	os.chmod(tempor, 0o500)
