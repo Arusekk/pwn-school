@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-unsigned long long arr[2]={12345, 67890};
+void* arr[2]={12345, 67890};
 char ans[16];
 
 int main()
